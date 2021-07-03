@@ -20,23 +20,23 @@ function DiseaseDetection() {
     const [result,setResults] = useState([])
 
     useEffect(()=>{
-        // if(url){
-        //     fetch("/cropDiseaseDetection",{
-        //         method:"post",
-        //         headers:{
-        //             "Content-Type":"application/json" ,
-        //         },
-        //         body:JSON.stringify({
-        //             image_url : url ,
-        //         }) 
-        //         }).then(res=>res.json())
-        //         .then(data=>{
-        //             setResults(data.result)
-        //         }).catch(err=>{
-        //             console.log(err)
-        //         })
+        if(url){
+            fetch("/cropDiseaseDetection",{
+                method:"post",
+                headers:{
+                    "Content-Type":"application/json" ,
+                },
+                body:JSON.stringify({
+                    image_url : url ,
+                }) 
+                }).then(res=>res.json())
+                .then(data=>{
+                    setResults(data.result)
+                }).catch(err=>{
+                    console.log(err)
+                })
 
-        // }
+        }
         console.log(image)
         console.log(url)
     },[image,url])
@@ -44,8 +44,6 @@ function DiseaseDetection() {
 
 
     const postDetails = ()=>{
-        const result1=[2,4,7,8];
-        setResults(result1)
         const data = new FormData()
         data.append("file",image)
         data.append("upload_preset","Instafam")
