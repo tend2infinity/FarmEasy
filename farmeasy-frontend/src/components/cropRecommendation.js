@@ -78,7 +78,7 @@ function Recommendation() {
             <Card className={classes.analyzationcard}>
                 <CardContent>
                     <Typography style={{ marginBottom: '10px' }} variant="h5" >
-                        <b>Crop Analyzation</b>
+                        <b>Crop Recommendation</b>
                     </Typography>
                     <Typography style={{ marginBottom: '30px' }} color="textSecondary">
                         Select your preferred State and District and we will present the crop best Recommended to you based on the Previous Year Trend!
