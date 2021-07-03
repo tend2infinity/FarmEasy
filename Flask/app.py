@@ -16,26 +16,20 @@ def home():
 
 @app.route('/cropProduction',methods = ['POST'])
 def prodiction():
-    state = request.form['state']
-    district = request.form['district']
-    year = int(request.form['year'])
-    return CropProductionModel.predictCropProductionInYear(state,district,year)
+    data = request.json
+    return CropProductionModel.predictCropProductionInYear(data.state,data.district,int(data.year))
 
 
 @app.route('/cropProductionByYear',methods =['POST'])
 def cropProdByYear():
-    state = request.form['state']
-    district = request.form['district']
-    crop = request.form['year']
-    return CropProductionModel.predictCropProductionByYears(state,district,crop)
+    data = request.json
+    return CropProductionModel.predictCropProductionByYears(data.state,data.district,data.crop)
 
 
 @app.route('/cropPredictByProduction',methods=['POST'])
 def func():
-    state = int(request.form['state'])
-    season = int(request.form['season'])
-    crop  =  int(request.form['crop'])
-    return CropProductionModel.CropPredictionProduction(state,season,crop)
+    data = request.json
+    return CropProductionModel.CropPredictionProduction(data.state, data.season, data.crop,data.area)
 
 
 @app.route('/cropRecommendation',methods = ['POST'])

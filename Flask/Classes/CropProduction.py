@@ -30,14 +30,14 @@ class CropProduction:
         filtered_data = self.df[ (self.df['state_name'] == state) & (self.df['district_name'] == district) & (self.df['crop_year'] == year)]
         return json.dumps(filtered_data.to_dict('records'))
 
-    def CropPredictionProduction(self,state,season,crop):
+    def CropPredictionProduction(self,state,season,crop,area):
         model_file = open('../Models/cropProductionPred.pkl','rb')
         model = pickle.load(model_file)
         model_file.close()
-        pred = pd.DataFrame({'State_Name' : state, 'Season' : season , 'Crop' : crop , 'Area' : 200}, index=[0])
+        decodedState =  self.stateEncoder.fit_transform([state])
+        decodedSeason = self.seasonEnoder.fit_transform([season])
+        decodedCrop = self.cropEncoder.fit_transform([crop])
+        pred = pd.DataFrame({'State_Name' : decodedState, 'Season' : decodedSeason , 'Crop' : decodedCrop , 'Area' : area}, index=[0])
         res = model.predict(pred)
         print(res)
-        decodedState =  self.stateEncoder.inverse_transform([state])
-        decodedSeason = self.seasonEnoder.inverse_transform([season])
-        decodedCrop = self.cropEncoder.inverse_transform([crop])
         return {"status" : "OK"}
