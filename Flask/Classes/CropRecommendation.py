@@ -12,9 +12,9 @@ class CropRecommendation:
         CropRecommendationPklFile.close()
 
 
-    def PredictCrop(self,x,y,z):
+    def PredictCrop(self ,x ,y ,z ):
         data = {'temperature':x,'humidity':y,'rainfall':z}
-        pred = pd.DataFrame(data)
+        pred = pd.DataFrame(data,index=[0])
         ans = self.RecommendationModel.predict(pred)
         labeled_ans = self.cropEncoder.inverse_transform([ans])
         print(labeled_ans)

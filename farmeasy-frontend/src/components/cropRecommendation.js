@@ -72,6 +72,7 @@ function Recommendation() {
                         })
                     }).then(res => res.json())
                         .then(data => {
+                            console.log(data)
                             setCrop(data.result)
                             toggleModalOpen()
                             console.log(crop)
@@ -91,8 +92,6 @@ function Recommendation() {
         
 
         <div style={{ display: 'flex', flexDirection: 'column', marginBottom: '20%', alignItems: 'center' }}>
-            <button onClick={toggleModalOpen}>click</button>
-
             <Modal
                 open={modal}
                 onClose={toggleModalClose}
@@ -107,7 +106,9 @@ function Recommendation() {
                 <div className={classes.modalPaper}>
                 <Typography variant='h6' id="simple-modal-title">Our recommended crop</Typography>
                 <div className={classes.modalParentContent}>
-                    the values
+                    <Typography variant="h3">
+                        {crop}
+                    </Typography>
                 </div>
                     </div>
 

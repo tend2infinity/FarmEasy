@@ -68,7 +68,8 @@ function Analyzation() {
                 })
             }).then(res => res.json())
                 .then(data => {
-                    setDetails(data)
+                    setDetails(data);
+                    console.log(data);
                 }).catch(err => {
                     console.log(err)
                 })
@@ -86,6 +87,7 @@ function Analyzation() {
             }).then(res => res.json())
                 .then(data => {
                     setDetails(data)
+                    console.log(data);
                 }).catch(err => {
                     console.log(err)
                 })  
@@ -246,8 +248,8 @@ function Analyzation() {
                 </CardMedia>
 
             </Card>
-            {
-                details.length > 0 ? details.map(data=>{
+            {/* {
+                           details.map(data=>{
                     return(
                         <div>
                         <Typography variant='body1'>{data.year}</Typography>
@@ -256,8 +258,8 @@ function Analyzation() {
                         <Typography variant='body1'>{data['p/a']}</Typography>
                         </div>
                     )
-                })
-            }
+                }) 
+            } */}
         </div>
     )
 }
