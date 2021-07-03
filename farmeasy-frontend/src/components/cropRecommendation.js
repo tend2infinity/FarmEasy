@@ -16,6 +16,9 @@ import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
 import CheckBoxIcon from '@material-ui/icons/CheckBox';
 import { FormControlLabel } from '@material-ui/core';
 import FormGroup from '@material-ui/core/FormGroup';
+import Modal from '@material-ui/core/Modal';
+import Backdrop from '@material-ui/core/Backdrop';
+import Fade from '@material-ui/core/Fade';
 
 const API_KEY = 'c509a8a585ad4de295b110458210307'
 
@@ -27,6 +30,14 @@ function Recommendation() {
     const [temp,setTemp] = useState(25);
     const [humidity , setHumidity] = useState(71)
     const [rainfall , setRainfall] = useState(103)
+    const [modal, setModal] = useState(false)
+    const toggleModalOpen = () => {
+        setModal(true)
+
+    }
+    const toggleModalClose = () => {
+        setModal(false)
+    }
     const statearr = Object.keys(stateList)
 
     const handleStateChange = (event) => {
@@ -62,6 +73,7 @@ function Recommendation() {
                     }).then(res => res.json())
                         .then(data => {
                             setCrop(data.result)
+                            toggleModalOpen()
                             console.log(crop)
                         }).catch(err => {
                             console.log(err)
@@ -74,7 +86,38 @@ function Recommendation() {
     }
 
     return (
+        
+
+        
+
         <div style={{ display: 'flex', flexDirection: 'column', marginBottom: '20%', alignItems: 'center' }}>
+            <button onClick={toggleModalOpen}>click</button>
+
+            <Modal
+                open={modal}
+                onClose={toggleModalClose}
+                className={classes.modal}
+                closeAfterTransition
+                BackdropComponent={Backdrop}
+                BackdropProps={{
+                    timeout: 500,
+                }}
+            >
+                <Fade in={modal}>
+                <div className={classes.modalPaper}>
+                <Typography variant='h6' id="simple-modal-title">Our recommended crop</Typography>
+                <div className={classes.modalParentContent}>
+                    the values
+                </div>
+                    </div>
+
+                </Fade>
+
+
+            </Modal>
+
+
+
             <Card className={classes.analyzationcard}>
                 <CardContent>
                     <Typography style={{ marginBottom: '10px' }} variant="h5" >
