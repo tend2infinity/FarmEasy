@@ -47,6 +47,17 @@ const useStyles = makeStyles((theme) => ({
         height:'auto',
         borderRadius: '10px'
     },
+    diseaseroot:{
+        maxWidth: '70%',
+        height: 'auto',
+        backgroundColor: '#BDD2B6',
+        margin: '50px',
+        display: 'flex',
+        marginLeft: '10%',
+  
+
+    },
+  
 
 }));
 
