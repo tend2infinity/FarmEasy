@@ -1,15 +1,10 @@
 import tensorflow as tf
-import cv2
-from tensorflow.keras.preprocessing.image import img_to_array
-import matplotlib.pyplot as plt
 import numpy as np
 from PIL import Image
 import requests
-import os
 from flask import jsonify
 model = tf.keras.models.load_model('../Models/transfer_model.h5')
 DEFAULT_IMAGE_SIZE = 224
-import json
 
 def convert_image_to_array(image_dir):
     try:
@@ -26,11 +21,8 @@ def predict_disease(image_path):
     image_array = convert_image_to_array(image_path)
     np_image = np.array(image_array, dtype=np.float16) / 225.0
     np_image = np.expand_dims(np_image,0)
-    # plt.imshow(plt.imread(image_path))
     result = model.predict(np_image)
     result  = result.flatten()
     converted_list = result.tolist()
-    print(len(converted_list))
     res = sorted(range(len(converted_list)), key = lambda sub: converted_list[sub])[-6:]
-    print(res)
     return jsonify(result=res)
