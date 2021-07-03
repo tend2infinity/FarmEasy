@@ -10,7 +10,7 @@ import { BrowserRouter, Route , Switch } from 'react-router-dom';
 function App() {
   return (
     <div className="App">
-            <Navbar />
+      <Navbar />
       <BrowserRouter>
       <Switch>
       <Route exact path="/" >
