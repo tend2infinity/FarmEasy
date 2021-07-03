@@ -54,6 +54,7 @@ const useStyles = makeStyles((theme) => ({
         margin: '50px',
         display: 'flex',
         marginLeft: '10%',
+        marginBottom: '400px'
   
 
     },
@@ -61,6 +62,8 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: '#BDD2B6',
         margin:'10px 25px',
         display: 'flex',
+        padding:'10px',
+        
     }
   
 

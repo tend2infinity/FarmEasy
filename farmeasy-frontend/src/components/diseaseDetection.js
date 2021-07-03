@@ -96,13 +96,13 @@ function DiseaseDetection() {
             </Card>
 
             
-                <div style={{display:'flex', flexDirection:'column', alignItems:'center'}}>
+                <div style={{display:'flex', flexDirection:'column', alignItems:'center', flex: '1 1 0'}}>
                 {
                 result.map(i=>{
                     return(
                         
                         <Card className={classes.responsecard}>
-                            <Typography variant="caption">
+                            <Typography variant="subtitle1">
                             {DiseaseLabels[i]}
                             </Typography>
                         </Card>
