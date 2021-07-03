@@ -95,7 +95,7 @@ function DiseaseDetection() {
                 </CardMedia>
                  
             </Card>
-            <img src="illustration1.png" maxWidth='500px' height='auto' alt="illustartion" />
+   
         </div>
     )
 }
