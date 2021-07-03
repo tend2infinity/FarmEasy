@@ -64,6 +64,14 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
         padding:'8px',
         justifyContent:'center'
+    },
+    imageresponsecard:{
+        backgroundColor: '#BDD2B6',
+        margin:'10px 35px',
+        display: 'flex',
+        flexDirection:'column',
+        padding:'30px',
+        justifyContent:'center'
     }
   
 
