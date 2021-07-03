@@ -57,6 +57,11 @@ const useStyles = makeStyles((theme) => ({
   
 
     },
+    responsecard:{
+        backgroundColor: '#BDD2B6',
+        margin:'10px 25px',
+        display: 'flex',
+    }
   
 
 }));

@@ -10,6 +10,9 @@ import TextField from '@material-ui/core/TextField';
 import ListItemText from '@material-ui/core/ListItemText';
 import { CardMedia } from '@material-ui/core';
 import {DiseaseLabels} from '../utilities'
+
+
+
 function DiseaseDetection() {
     const [image,setImage] = useState("")
     const [url,setUrl] = useState("")
@@ -17,23 +20,23 @@ function DiseaseDetection() {
     const [result,setResults] = useState([])
 
     useEffect(()=>{
-        if(url){
-            fetch("/cropDiseaseDetection",{
-                method:"post",
-                headers:{
-                    "Content-Type":"application/json" ,
-                },
-                body:JSON.stringify({
-                    image_url : url ,
-                }) 
-                }).then(res=>res.json())
-                .then(data=>{
-                    setResults(data.result)
-                }).catch(err=>{
-                    console.log(err)
-                })
+        // if(url){
+        //     fetch("/cropDiseaseDetection",{
+        //         method:"post",
+        //         headers:{
+        //             "Content-Type":"application/json" ,
+        //         },
+        //         body:JSON.stringify({
+        //             image_url : url ,
+        //         }) 
+        //         }).then(res=>res.json())
+        //         .then(data=>{
+        //             setResults(data.result)
+        //         }).catch(err=>{
+        //             console.log(err)
+        //         })
 
-        }
+        // }
         console.log(image)
         console.log(url)
     },[image,url])
@@ -41,6 +44,8 @@ function DiseaseDetection() {
 
 
     const postDetails = ()=>{
+        const result1=[2,4,7,8];
+        setResults(result1)
         const data = new FormData()
         data.append("file",image)
         data.append("upload_preset","Instafam")
@@ -87,16 +92,28 @@ function DiseaseDetection() {
                 <CardMedia>
                 <img src="https://cdn.pixabay.com/photo/2013/07/13/11/31/man-158320__340.png" alt="image" width="200px" height="auto" />
                 </CardMedia>
-            {
+            
+            </Card>
+
+            
+                <div style={{display:'flex', flexDirection:'column', alignItems:'center'}}>
+                {
                 result.map(i=>{
                     return(
-                        <Typography variant="h4">
+                        
+                        <Card className={classes.responsecard}>
+                            <Typography variant="caption">
                             {DiseaseLabels[i]}
-                        </Typography>
-                    )
-                })
-            }
-            </Card>
+                            </Typography>
+                        </Card>
+                         
+                        )    
+                    })
+                }
+                   
+                </div>
+            
+               
    
         </div>
     )
