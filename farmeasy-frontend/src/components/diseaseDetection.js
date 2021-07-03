@@ -31,7 +31,7 @@ function DiseaseDetection() {
                 }) 
                 }).then(res=>res.json())
                 .then(data=>{
-                    setResults(data.result)
+                    setResults(data.result.reverse())
                 }).catch(err=>{
                     console.log(err)
                 })
@@ -92,25 +92,26 @@ function DiseaseDetection() {
                 </CardMedia>
             
             </Card>
-
-            
-                <div style={{display:'flex', flexDirection:'column', alignItems:'center',marginTop:'30px'}}>
-                    <Typography variant='h5'><b>Expected Diseases</b></Typography>
                 {
-                result.map(i=>{
-                    return(
-                        
-                        <Card className={classes.responsecard}>
-                            <Typography variant="subtitle1">
-                            {DiseaseLabels[i]}
-                            </Typography>
-                        </Card>
-                         
+                    result.length > 0 ? 
+                    (<div style={{display:'flex',flexDirection:'column', justifyContent:'center',marginTop:'30px'}}>
+                        <Typography variant='h5'><b>Expected Diseases</b></Typography>
+                    {
+                        result.map(i=>{
+                        return(
+                            <Card className={classes.responsecard}>
+                                <Typography variant="subtitle1">
+                                {DiseaseLabels[i]}
+                                </Typography>
+                            </Card> 
                         )    
                     })
                 }
-                   
-                </div>
+                </div>): null 
+                    
+                }
+            
+                
             
                
    
