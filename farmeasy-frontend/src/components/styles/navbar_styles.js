@@ -86,7 +86,41 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
         maxWidth: '70%',
         height: 'auto',
-    }
+    },
+    modal: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        flexDirection: 'column',
+    },
+    modalPaper: {
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        backgroundColor: theme.palette.background.paper,
+        border: '2px solid #000',
+        boxShadow: theme.shadows[5],
+        padding: theme.spacing(2, 4, 3),
+        flexBasis: '0'
+    },
+    modalParentContent: {
+        display: 'flex',
+        flexWrap: 'wrap',
+    },
+    modalContent: {
+        padding: '10px',
+        margin: '8px',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        flexGrow: '1',
+        flexBasis: '0',
+        width: '140px',
+        border: '2px solid #A8A8A8', '&:hover' :{
+            border: '2px solid #0e70ad' },
+        cursor: 'pointer',
+        
+    },
   
 
 }));
