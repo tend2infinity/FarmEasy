@@ -5,11 +5,8 @@ import CardContent from '@material-ui/core/CardContent';
 import useStyles from './styles/navbar_styles';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
-import ListItem from '@material-ui/core/ListItem';
-import TextField from '@material-ui/core/TextField';
-import ListItemText from '@material-ui/core/ListItemText';
 import { CardMedia } from '@material-ui/core';
-import { DiseaseLabels } from '../utilities'
+import { DiseaseLabels } from '../utilities';
 
 
 
@@ -18,6 +15,7 @@ function DiseaseDetection() {
     const [url, setUrl] = useState("")
     const classes = useStyles();
     const [result, setResults] = useState([])
+
 
     useEffect(() => {
         if (url) {
@@ -94,7 +92,8 @@ function DiseaseDetection() {
             </Card>
             <div style={{ display: 'flex', alignItems: 'center' }}>
 
-                {url ? <Card className={classes.imageresponsecard}><img src={url} width="350px" height="auto" /></Card> : ''}
+                {url ? <Card className={classes.imageresponsecard}><img src={url} width="350px" height="auto" /></Card> : 
+                '' }
 
                 <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', marginTop: '30px' }}>
 
@@ -105,7 +104,7 @@ function DiseaseDetection() {
 
                                 <Card className={classes.responsecard}>
                                     <Typography variant="subtitle1">
-                                        {DiseaseLabels[i]}
+                                         {DiseaseLabels[i]}
                                     </Typography>
                                 </Card>
 

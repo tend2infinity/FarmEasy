@@ -10,8 +10,9 @@ import { BrowserRouter, Route , Switch } from 'react-router-dom';
 function App() {
   return (
     <div className="App">
-      <Navbar />
+      
       <BrowserRouter>
+      <Navbar />
       <Switch>
       <Route exact path="/" >
        <Home />
