@@ -24,5 +24,5 @@ def predict_disease(image_path):
     result = model.predict(np_image)
     result  = result.flatten()
     converted_list = result.tolist()
-    res = sorted(range(len(converted_list)), key = lambda sub: converted_list[sub])[-6:]
+    res = sorted(range(len(converted_list)), key = lambda sub: converted_list[sub],reverse=True)[-6:]
     return jsonify(result=res)
