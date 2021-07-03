@@ -2,7 +2,7 @@ import os
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 from flask import Flask,request
 from Classes.CropProduction import CropProduction
-from Notebooks.temp import predict_disease
+from Classes.CropDiseaseDetection import predict_disease
 CropProductionModel = CropProduction()
 
 app = Flask(__name__)
