@@ -1,12 +1,13 @@
 import os
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 from flask import Flask,request
+from flask_cors import CORS
 from Classes.CropProduction import CropProduction
 from Classes.CropDiseaseDetection import predict_disease
 CropProductionModel = CropProduction()
 
 app = Flask(__name__)
-
+CORS(app)
 @app.route("/cropPrediction",methods = ['POST'])
 def home():
     data = request.json
@@ -45,8 +46,9 @@ def recommendation():
 
 @app.route('/cropDiseaseDetection',methods=['POST'])
 def predict():
-    data = request.form['image_url']
-    return predict_disease(data)
+    print(request.json)
+    data = request.json
+    return predict_disease(data['image_url'])
 
 if __name__== '__main__':
     app.run(debug = True)

@@ -9,15 +9,16 @@ import ListItem from '@material-ui/core/ListItem';
 import TextField from '@material-ui/core/TextField';
 import ListItemText from '@material-ui/core/ListItemText';
 import { CardMedia } from '@material-ui/core';
-
+import {DiseaseLabels} from '../utilities'
 function DiseaseDetection() {
     const [image,setImage] = useState("")
     const [url,setUrl] = useState("")
     const classes = useStyles();
+    const [result,setResults] = useState([])
 
     useEffect(()=>{
         if(url){
-            fetch("localhost:5000/cropDiseaseDetection",{
+            fetch("/cropDiseaseDetection",{
                 method:"post",
                 headers:{
                     "Content-Type":"application/json" ,
@@ -27,14 +28,7 @@ function DiseaseDetection() {
                 }) 
                 }).then(res=>res.json())
                 .then(data=>{
-                    console.log(data)
-                    // if(data.error)
-                    // {
-                    //     M.toast({html: data.error, classes:"#e53935 red darken-1"})
-                    // }
-                    // else{
-                    //     M.toast({html:"Created Post successfully" , classes:"#43a047 green darken-1"})
-                    // }
+                    setResults(data.result)
                 }).catch(err=>{
                     console.log(err)
                 })
@@ -93,7 +87,15 @@ function DiseaseDetection() {
                 <CardMedia>
                 <img src="https://cdn.pixabay.com/photo/2013/07/13/11/31/man-158320__340.png" alt="image" width="200px" height="auto" />
                 </CardMedia>
-                 
+            {
+                result.map(i=>{
+                    return(
+                        <Typography variant="h4">
+                            {DiseaseLabels[i]}
+                        </Typography>
+                    )
+                })
+            }
             </Card>
    
         </div>
