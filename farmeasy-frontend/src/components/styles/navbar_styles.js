@@ -75,6 +75,7 @@ const useStyles = makeStyles((theme) => ({
     },
     listItemHeader: {
         fontWeight: 'bold',
+        marginLeft:'50px'
     },
     listItemTextField: {
         width: '300px'

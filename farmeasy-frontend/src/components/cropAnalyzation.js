@@ -16,6 +16,7 @@ import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
 import CheckBoxIcon from '@material-ui/icons/CheckBox';
 import { FormControlLabel } from '@material-ui/core';
 import FormGroup from '@material-ui/core/FormGroup';
+import { crops } from '../utilities';
 
 
 
@@ -25,6 +26,8 @@ function Analyzation() {
     const [district, setDistrict] = useState('')
     const [yearcheck, setYearcheck] = useState(false)
     const [cropcheck, setCropcheck] = useState(false)
+    const [year, setYear] = useState('')
+    const [crop, setCrop] = useState('')
 
     const handleStateChange = (event) => {
         setState(event.target.value)
@@ -32,24 +35,32 @@ function Analyzation() {
     const handleDistrictChange = (event) => {
         setDistrict(event.target.value)
     }
-    const handleYearCheck = () =>{
+    const handleYearCheck = () => {
         setYearcheck(!yearcheck)
+        setCropcheck(false)
     }
-    const handleCropCheck = () =>{
+    const handleCropCheck = () => {
         setCropcheck(!cropcheck)
+        setYearcheck(false)
+    }
+    const handlYearChange = (event) => {
+        setYear(event.target.value)
+    }
+    const handleCropChange = (event) => {
+        setCrop(event.target.value)
     }
 
     const statearr = Object.keys(stateList)
     console.log(statearr)
-    
-    const postDetails = () =>{
+
+    const postDetails = () => {
         console.log("hii")
     }
 
 
 
     return (
-        <div style={{ display: 'flex', flexDirection: 'column', marginBottom: '20%', alignItems: 'center' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', marginBottom: '20%', alignItems: 'center', justifyContent: 'center' }}>
             <Card className={classes.analyzationcard}>
                 <CardContent>
                     <Typography style={{ marginBottom: '10px' }} variant="h5" >
@@ -106,15 +117,16 @@ function Analyzation() {
                             })
 
                         }
-                        <ListItem>
-                            <Typography variant="body1">
-                                <ListItemText disableTypography primary="Select a customization By year or by crops" className={classes.listItemHeader} />
-                            </Typography>
-                        </ListItem>
-                        
-                       
+
+
+
                     </TextField>
-                    <FormGroup row>
+                    <ListItem>
+                        <Typography variant="body1">
+                            <ListItemText disableTypography primary="Select a customization By year or by crops" className={classes.listItemHeader} />
+                        </Typography>
+                    </ListItem>
+                    <FormGroup style={{ marginLeft: '150px' }} row>
                         <FormControlLabel
                             control={<Checkbox checked={yearcheck} onChange={handleYearCheck} name="checkyear" />}
                             label="Year"
@@ -123,9 +135,76 @@ function Analyzation() {
                             control={<Checkbox checked={cropcheck} onChange={handleCropCheck} name="checkcrop" />}
                             label="Crop"
                         />
-                        </FormGroup>
-                        <Button style={{ margin: '10px' }} size='large' variant="contained" onClick={() => postDetails()}>Submit</Button>
+                    </FormGroup>
+                    <div style={{display:'flex', flexDirection:'column', alignItems:'center'}}>
+                    {yearcheck &&
+                        <TextField
+                            select
+                            label="Select"
+                            helperText="Please select an Year"
+                            variant="outlined"
+                            size="small"
+                            value={year}
+                            onChange={handlYearChange}
+                            className={classes.listItemTextField}
+                            required={true}
+                            style={{ marginLeft: "150px" }}
+                        >
+
+                            <MenuItem value="1997"> 1997 </MenuItem>
+                            <MenuItem value="1998"> 1998 </MenuItem>
+                            <MenuItem value="1999"> 1999 </MenuItem>
+                            <MenuItem value="2000"> 2000 </MenuItem>
+                            <MenuItem value="2001"> 2001 </MenuItem>
+                            <MenuItem value="2002"> 2002 </MenuItem>
+                            <MenuItem value="2003"> 2003 </MenuItem>
+                            <MenuItem value="2004"> 2004 </MenuItem>
+                            <MenuItem value="2005"> 2005 </MenuItem>
+                            <MenuItem value="2006"> 2006 </MenuItem>
+                            <MenuItem value="2007"> 2007 </MenuItem>
+                            <MenuItem value="2008"> 2008 </MenuItem>
+                            <MenuItem value="2009"> 2009 </MenuItem>
+                            <MenuItem value="2010"> 2010 </MenuItem>
+                            <MenuItem value="2011"> 2011 </MenuItem>
+                            <MenuItem value="2012"> 2012 </MenuItem>
+                            <MenuItem value="2013"> 2013 </MenuItem>
+                            <MenuItem value="2014"> 2014 </MenuItem>
+                            <MenuItem value="2015"> 2015 </MenuItem>
+
+                        </TextField>
+                    }
+
+                    {
+                        cropcheck &&
+                        <TextField
+                            select
+                            label="Select"
+                            helperText="Please select a Crop"
+                            variant="outlined"
+                            size="small"
+                            value={crop}
+                            onChange={handleCropChange}
+                            className={classes.listItemTextField}
+                            required={true}
+                            style={{ marginLeft: "150px" }}
+                        >
+                            {
+                                crops.map(item => {
+                                    return <MenuItem value={item}>{item}</MenuItem>
+                                })
+                            }
+
+
+                        </TextField>
+
+                    }
+
+                    <Button style={{ margin: '10px', width:'200px' }} size='large' variant="contained" onClick={() => postDetails()}>Submit</Button>
+
+                    </div>
+                    
                 </CardContent>
+
                 <CardMedia>
                     <img src="https://cdn.pixabay.com/photo/2013/07/13/11/31/man-158320__340.png" alt="image" width="200px" height="auto" />
                 </CardMedia>
