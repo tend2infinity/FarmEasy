@@ -20,23 +20,23 @@ function DiseaseDetection() {
     const [result, setResults] = useState([])
 
     useEffect(() => {
-        // if(url){
-        //     fetch("/cropDiseaseDetection",{
-        //         method:"post",
-        //         headers:{
-        //             "Content-Type":"application/json" ,
-        //         },
-        //         body:JSON.stringify({
-        //             image_url : url ,
-        //         }) 
-        //         }).then(res=>res.json())
-        //         .then(data=>{
-        //             setResults(data.result)
-        //         }).catch(err=>{
-        //             console.log(err)
-        //         })
+        if (url) {
+            fetch("/cropDiseaseDetection", {
+                method: "post",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    image_url: url,
+                })
+            }).then(res => res.json())
+                .then(data => {
+                    setResults(data.result.reverse())
+                }).catch(err => {
+                    console.log(err)
+                })
 
-        // }
+        }
         console.log(image)
         console.log(url)
     }, [image, url])
@@ -44,8 +44,6 @@ function DiseaseDetection() {
 
 
     const postDetails = () => {
-        const result1 = [2, 4, 7, 8];
-        setResults(result1)
         const data = new FormData()
         data.append("file", image)
         data.append("upload_preset", "Instafam")
@@ -68,7 +66,7 @@ function DiseaseDetection() {
 
 
     return (
-        <div style={{ display: 'flex', flexDirection: 'column', marginBottom: '20%', alignItems:'center' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', marginBottom: '20%', alignItems: 'center' }}>
             <div style={{ display: 'flex', alignItems: 'center' }}>
                 <Card className={classes.diseaseroot}>
 
@@ -96,27 +94,33 @@ function DiseaseDetection() {
 
                 </Card>
 
+                {
+                    result.length > 0 &&
+                        (
+                        <div>
+                            <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', marginTop: '30px' }}>
+                                <Typography variant='h5'><b>Expected Diseases</b></Typography>
+                                {
+                                    result.map(i => {
+                                        return (
 
-                <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', marginTop: '30px' }}>
-                    <Typography variant='h5'><b>Expected Diseases</b></Typography>
-                    {
-                        result.map(i => {
-                            return (
+                                            <Card className={classes.responsecard}>
+                                                <Typography variant="subtitle1">
+                                                    {DiseaseLabels[i]}
+                                                </Typography>
+                                            </Card>
 
-                                <Card className={classes.responsecard}>
-                                    <Typography variant="subtitle1">
-                                        {DiseaseLabels[i]}
-                                    </Typography>
-                                </Card>
-
-                            )
-                        })
-                    }
-                </div>
-            </div>
-            {url ? <img style={{marginTop:'35px'}} src={url} width="800px" height="500px" border='2px solid grey' /> : ''}
+                                        )
+                                    })
+                                }
+                            </div>
+                     </div>)   
+                }
+                {
+                    url ? <img style={{ marginTop: '35px' }} src={url} width="800px" height="500px" border='2px solid grey' /> : ''
+                }
         </div>
-
+    </div>
     )
 }
 

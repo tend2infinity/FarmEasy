@@ -62,7 +62,7 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: '#BDD2B6',
         margin:'10px 35px',
         display: 'flex',
-        padding:'8px',
+        padding:'8px 18px',
         justifyContent:'center'
     }
   
