@@ -68,7 +68,7 @@ function DiseaseDetection() {
 
 
     return (
-        <div style={{display:'flex', alignItems:'center' }}>
+        <div style={{display:'flex', alignItems:'center', marginBottom:'20%' }}>
             <Card className={classes.diseaseroot}>
                 
                 <CardContent>
@@ -96,7 +96,8 @@ function DiseaseDetection() {
             </Card>
 
             
-                <div style={{display:'flex', flexDirection:'column', alignItems:'center', flex: '1 1 0'}}>
+                <div style={{display:'flex', flexDirection:'column', alignItems:'center',marginTop:'30px'}}>
+                    <Typography variant='h5'><b>Expected Diseases</b></Typography>
                 {
                 result.map(i=>{
                     return(

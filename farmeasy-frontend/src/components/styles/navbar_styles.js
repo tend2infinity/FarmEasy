@@ -54,16 +54,16 @@ const useStyles = makeStyles((theme) => ({
         margin: '50px',
         display: 'flex',
         marginLeft: '10%',
-        marginBottom: '400px'
+  
   
 
     },
     responsecard:{
         backgroundColor: '#BDD2B6',
-        margin:'10px 25px',
+        margin:'10px 35px',
         display: 'flex',
-        padding:'10px',
-        
+        padding:'8px',
+        justifyContent:'center'
     }
   
 
