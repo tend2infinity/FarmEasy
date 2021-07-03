@@ -72,6 +72,19 @@ const useStyles = makeStyles((theme) => ({
         flexDirection:'column',
         padding:'30px',
         justifyContent:'center'
+    },
+    listItemHeader: {
+        fontWeight: 'bold',
+    },
+    listItemTextField: {
+        width: '300px'
+    },
+    analyzationcard: {
+        backgroundColor: '#BDD2B6',
+        margin:'10px 35px',
+        display: 'flex',
+        maxWidth: '70%',
+        height: 'auto',
     }
   
 
