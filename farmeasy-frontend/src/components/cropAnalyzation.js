@@ -28,6 +28,7 @@ function Analyzation() {
     const [cropcheck, setCropcheck] = useState(false)
     const [year, setYear] = useState('')
     const [crop, setCrop] = useState('')
+    const [details,setDetails] = useState([])
 
     const handleStateChange = (event) => {
         setState(event.target.value)
@@ -54,7 +55,44 @@ function Analyzation() {
     console.log(statearr)
 
     const postDetails = () => {
-        console.log("hii")
+        if(crop.length>0){
+            fetch("/cropProductionByYear", {
+                method: "post",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    'crop' : crop,
+                    'district' : district,
+                    'state': state
+                })
+            }).then(res => res.json())
+                .then(data => {
+                    setDetails(data);
+                    console.log(data);
+                }).catch(err => {
+                    console.log(err)
+                })
+        }else if(year.length > 0 ){
+            fetch("/cropProduction", {
+                method: "post",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    'crop' : crop,
+                    'district' : district,
+                    'year': parseInt(year)
+                })
+            }).then(res => res.json())
+                .then(data => {
+                    setDetails(data)
+                    console.log(data);
+                }).catch(err => {
+                    console.log(err)
+                })  
+        }
+
     }
 
 
@@ -210,6 +248,18 @@ function Analyzation() {
                 </CardMedia>
 
             </Card>
+            {/* {
+                           details.map(data=>{
+                    return(
+                        <div>
+                        <Typography variant='body1'>{data.year}</Typography>
+                        <Typography variant='body1'>{data.season}</Typography>
+                        <Typography variant='body1'>{data.crop}</Typography>
+                        <Typography variant='body1'>{data['p/a']}</Typography>
+                        </div>
+                    )
+                }) 
+            } */}
         </div>
     )
 }
