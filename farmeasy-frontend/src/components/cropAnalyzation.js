@@ -17,10 +17,15 @@ import CheckBoxIcon from '@material-ui/icons/CheckBox';
 import { FormControlLabel } from '@material-ui/core';
 import FormGroup from '@material-ui/core/FormGroup';
 import { crops } from '../utilities';
-
+import BarChart from 'react-bar-chart';
+// var CanvasJSReact = require('./canvasjs.react');
+// var CanvasJS = CanvasJSReact.CanvasJS;
+// var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
 
 function Analyzation() {
+    const margin = { top: 0, right:5, bottom: 20, left: 30 };
+
     const classes = useStyles();
     const [state, setState] = useState('')
     const [district, setDistrict] = useState('')
@@ -28,7 +33,25 @@ function Analyzation() {
     const [cropcheck, setCropcheck] = useState(false)
     const [year, setYear] = useState('')
     const [crop, setCrop] = useState('')
-    const [details,setDetails] = useState([])
+    const [details, setDetails] = useState([])
+    const [chartDisplay, setChartDisplay] = useState(false)
+    const options = {
+        animationEnabled: true,
+        exportEnabled: true,
+        theme: "light2", //"light1", "dark1", "dark2"
+        title:{
+            text: "Simple Column Chart with Index Labels"
+        },
+        axisY: {
+            includeZero: true
+        },
+        data: [{
+            type: "column",
+            indexLabelFontColor: "#5A5757",
+            indexLabelPlacement: "outside",
+            dataPoints: details
+        }]
+    }
 
     const handleStateChange = (event) => {
         setState(event.target.value)
@@ -52,45 +75,62 @@ function Analyzation() {
     }
 
     const statearr = Object.keys(stateList)
-    console.log(statearr)
 
     const postDetails = () => {
-        if(crop.length>0){
+        if (crop.length > 0) {
             fetch("/cropProductionByYear", {
                 method: "post",
                 headers: {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
-                    'crop' : crop,
-                    'district' : district,
+                    'crop': crop,
+                    'district': district,
                     'state': state
                 })
             }).then(res => res.json())
                 .then(data => {
-                    setDetails(data);
-                    console.log(data);
+                    let temp = data.map(oData => {
+                        return {
+                            'text': oData.crop_year,
+                            'value': oData['p/a']
+                        }
+                    });
+                    console.log(temp);
+                    setDetails(temp);
+                    setChartDisplay(true);
                 }).catch(err => {
                     console.log(err)
                 })
-        }else if(year.length > 0 ){
+        } else if (year.length > 0) {
             fetch("/cropProduction", {
                 method: "post",
                 headers: {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
-                    'crop' : crop,
-                    'district' : district,
+                    'state': state,
+                    'district': district,
                     'year': parseInt(year)
                 })
             }).then(res => res.json())
                 .then(data => {
-                    setDetails(data)
-                    console.log(data);
+                    let temp = data.map(oData => {
+                        if(oData['p/a']>0){
+                            return {
+                                'text': oData.crop,
+                                'value': oData['p/a']
+                            }
+                        }else{
+                            return ;
+                        }
+                    });
+                    console.log(temp);
+                    setDetails(temp);
+                    setChartDisplay(true);
                 }).catch(err => {
                     console.log(err)
-                })  
+                })
         }
 
     }
@@ -150,7 +190,6 @@ function Analyzation() {
                         {
                             state &&
                             stateList[state].map(item => {
-                                console.log(item);
                                 return <MenuItem value={item} > {item} </MenuItem>
                             })
 
@@ -174,73 +213,73 @@ function Analyzation() {
                             label="Crop"
                         />
                     </FormGroup>
-                    <div style={{display:'flex', flexDirection:'column', alignItems:'center'}}>
-                    {yearcheck &&
-                        <TextField
-                            select
-                            label="Select"
-                            helperText="Please select an Year"
-                            variant="outlined"
-                            size="small"
-                            value={year}
-                            onChange={handlYearChange}
-                            className={classes.listItemTextField}
-                            required={true}
-                            style={{ marginLeft: "150px" }}
-                        >
+                    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                        {yearcheck &&
+                            <TextField
+                                select
+                                label="Select"
+                                helperText="Please select an Year"
+                                variant="outlined"
+                                size="small"
+                                value={year}
+                                onChange={handlYearChange}
+                                className={classes.listItemTextField}
+                                required={true}
+                                style={{ marginLeft: "150px" }}
+                            >
 
-                            <MenuItem value="1997"> 1997 </MenuItem>
-                            <MenuItem value="1998"> 1998 </MenuItem>
-                            <MenuItem value="1999"> 1999 </MenuItem>
-                            <MenuItem value="2000"> 2000 </MenuItem>
-                            <MenuItem value="2001"> 2001 </MenuItem>
-                            <MenuItem value="2002"> 2002 </MenuItem>
-                            <MenuItem value="2003"> 2003 </MenuItem>
-                            <MenuItem value="2004"> 2004 </MenuItem>
-                            <MenuItem value="2005"> 2005 </MenuItem>
-                            <MenuItem value="2006"> 2006 </MenuItem>
-                            <MenuItem value="2007"> 2007 </MenuItem>
-                            <MenuItem value="2008"> 2008 </MenuItem>
-                            <MenuItem value="2009"> 2009 </MenuItem>
-                            <MenuItem value="2010"> 2010 </MenuItem>
-                            <MenuItem value="2011"> 2011 </MenuItem>
-                            <MenuItem value="2012"> 2012 </MenuItem>
-                            <MenuItem value="2013"> 2013 </MenuItem>
-                            <MenuItem value="2014"> 2014 </MenuItem>
-                            <MenuItem value="2015"> 2015 </MenuItem>
+                                <MenuItem value="1997"> 1997 </MenuItem>
+                                <MenuItem value="1998"> 1998 </MenuItem>
+                                <MenuItem value="1999"> 1999 </MenuItem>
+                                <MenuItem value="2000"> 2000 </MenuItem>
+                                <MenuItem value="2001"> 2001 </MenuItem>
+                                <MenuItem value="2002"> 2002 </MenuItem>
+                                <MenuItem value="2003"> 2003 </MenuItem>
+                                <MenuItem value="2004"> 2004 </MenuItem>
+                                <MenuItem value="2005"> 2005 </MenuItem>
+                                <MenuItem value="2006"> 2006 </MenuItem>
+                                <MenuItem value="2007"> 2007 </MenuItem>
+                                <MenuItem value="2008"> 2008 </MenuItem>
+                                <MenuItem value="2009"> 2009 </MenuItem>
+                                <MenuItem value="2010"> 2010 </MenuItem>
+                                <MenuItem value="2011"> 2011 </MenuItem>
+                                <MenuItem value="2012"> 2012 </MenuItem>
+                                <MenuItem value="2013"> 2013 </MenuItem>
+                                <MenuItem value="2014"> 2014 </MenuItem>
+                                <MenuItem value="2015"> 2015 </MenuItem>
 
-                        </TextField>
-                    }
+                            </TextField>
+                        }
 
-                    {
-                        cropcheck &&
-                        <TextField
-                            select
-                            label="Select"
-                            helperText="Please select a Crop"
-                            variant="outlined"
-                            size="small"
-                            value={crop}
-                            onChange={handleCropChange}
-                            className={classes.listItemTextField}
-                            required={true}
-                            style={{ marginLeft: "150px" }}
-                        >
-                            {
-                                crops.map(item => {
-                                    return <MenuItem value={item}>{item}</MenuItem>
-                                })
-                            }
+                        {
+                            cropcheck &&
+                            <TextField
+                                select
+                                label="Select"
+                                helperText="Please select a Crop"
+                                variant="outlined"
+                                size="small"
+                                value={crop}
+                                onChange={handleCropChange}
+                                className={classes.listItemTextField}
+                                required={true}
+                                style={{ marginLeft: "150px" }}
+                            >
+                                {
+                                    crops.map(item => {
+                                        return <MenuItem value={item}>{item}</MenuItem>
+                                    })
+                                }
 
 
-                        </TextField>
+                            </TextField>
 
-                    }
+                        }
 
-                    <Button style={{ margin: '10px', width:'200px' }} size='large' variant="contained" onClick={() => postDetails()}>Submit</Button>
+                        <Button style={{ margin: '10px', width: '200px' }} size='large' variant="contained" onClick={() => postDetails()}>Submit</Button>
 
                     </div>
-                    
+
                 </CardContent>
 
                 <CardMedia>
@@ -248,18 +287,18 @@ function Analyzation() {
                 </CardMedia>
 
             </Card>
-            {/* {
-                           details.map(data=>{
-                    return(
-                        <div>
-                        <Typography variant='body1'>{data.year}</Typography>
-                        <Typography variant='body1'>{data.season}</Typography>
-                        <Typography variant='body1'>{data.crop}</Typography>
-                        <Typography variant='body1'>{data['p/a']}</Typography>
-                        </div>
-                    )
-                }) 
-            } */}
+            <div>
+                {
+                    chartDisplay ? (details.length > 0 ?
+                            <BarChart ylabel='Production per unit Area'
+                                width={1500}
+                                height={500}
+                                margin={margin}
+                                style={{width : '500px'}}
+                                data={details} />
+                        : <Typography>No details Found! </Typography>) : null
+                }
+            </div>
         </div>
     )
 }
