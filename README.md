@@ -1,6 +1,6 @@
 # FarmEasy
 ### We Innovate your cultivation!
-FarmEasy is an agricultural and rural development project that uses the power of machine learning concepts like to aid our hardworking farmers in three important aspects -
+FarmEasy is an agricultural and rural development project that uses the power of machine learning concepts to aid our hardworking farmers in three important aspects -
 * __Crop Analyzation__
 * __Crop Recommendation__
 * __Disease Detection__
