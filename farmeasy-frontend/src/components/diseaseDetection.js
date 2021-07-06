@@ -94,8 +94,8 @@ function DiseaseDetection() {
 
                 {url ? <Card className={classes.imageresponsecard}><img src={url} width="350px" height="auto" /></Card> : 
                 '' }
-
-                <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', marginTop: '30px' }}>
+                {
+                    result.length>0 ? (<div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', marginTop: '30px' }}>
 
                     <Typography variant='h5'><b>Expected Diseases</b></Typography>
                     {
@@ -111,7 +111,9 @@ function DiseaseDetection() {
                             )
                         })
                     }
-                </div>
+                </div>) : null
+                }
+                
             </div>
 
         </div>

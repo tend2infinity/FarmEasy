@@ -294,7 +294,7 @@ function Analyzation() {
                                 width={1500}
                                 height={500}
                                 margin={margin}
-                                style={{width : '500px'}}
+                                style={{width : '500px',color:'red'}}
                                 data={details} />
                         : <Typography>No details Found! </Typography>) : null
                 }

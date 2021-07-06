@@ -104,7 +104,8 @@ function Recommendation() {
             >
                 <Fade in={modal}>
                 <div className={classes.modalPaper}>
-                <Typography variant='h6' id="simple-modal-title">Our recommended crop</Typography>
+                <Typography variant='h6' id="simple-modal-title">Youu Region has humidity of {humidity} ,Temperature of {temp} celsius and Rainfall of {rainfall} mm .
+                Our recommended crop</Typography>
                 <div className={classes.modalParentContent}>
                     <Typography variant="h3">
                         {crop}
